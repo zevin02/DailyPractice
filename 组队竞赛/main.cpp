@@ -19,10 +19,10 @@ int main()
     sort(num.begin(),num.end(),greater<int>());
      
     long long  ans=0;
-for(int i=0;i<n;i++)
-{
-ans+=num[2*i+1];
-}
+    for(int i=0;i<n;i++)
+    {
+    ans+=num[2*i+1];
+    }
         cout<<ans<<endl;
      
      
