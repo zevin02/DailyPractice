@@ -43,7 +43,46 @@ void quick_sort(int q[],int l,int r)
 }
 
 
+/*
+归并排序
+1.先找到中间点
+2.递归左右两边
+3.合并
 
+
+*/
+
+int tmp[N];
+void merge_sort(int q[],int l,int r)
+{
+    if(l>=r)//如果l超过了r的话就没有必要再继续排下去了，如果相等的话，就只有一个值的话也是没有必要继续排下去的
+    return;//直接返回
+
+    int mid=(l+r)>>1;//把中间的数当作分界点
+    merge_sort(q,l,mid);//递归左边的
+    merge_sort(q,mid+1,r);//递归右边的
+    int i=l;//i指向第一个数组的左边界
+    int j=mid+1;//j指向第二个数组的左边界
+    int k=0;
+    while(i<=mid&&j<=r)//如果其中一方走完就停止循环
+    {
+        if(q[i]>q[j])//把两者中间较为小的数字放到数组里面
+        {
+            tmp[k++]=q[j++];
+        }
+        else 
+        tmp[k++]=q[i++];
+    }
+    while(i<=mid)//后面的就全部直接都放进去
+    tmp[k++]=q[i++];
+    while(j<=r)
+    tmp[k++]=q[j++];
+    for(int i=l,j=0;i<=r;i++,j++)//把那些数字在拷贝回去原数组
+    q[i]=tmp[j];//r是右边界的下标，l是q左边界的下标
+    
+    
+
+}
 
 
 int main()
@@ -54,7 +93,8 @@ int main()
         scanf("%d",&q[i]);
     }
    
-    quick_sort(q,0,n-1);
+    //quick_sort(q,0,n-1);
+    merge_sort(q,0,n-1);
     for(int i=0;i<n;i++)
     printf("%d ",q[i]);
 
